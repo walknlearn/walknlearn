@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + TS</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    h1>YouTube Links</h1>
+    <ul id="youtube-links"></ul>
+    <script type="module" src="/src/main.ts"></script>
+    <script>
+      // Function to fetch the JSON file
+      function fetchYouTubeLinks() {
+          fetch('videos.json')
+              .then(response => response.json())
+              .then(data => renderYouTubeLinks(data))
+              .catch(error => console.error('Error fetching JSON:', error));
+      }
+
+      // Function to render the YouTube links
+      function renderYouTubeLinks(links) {
+          const list = document.getElementById('youtube-links');
+          links.forEach(link => {
+              const listItem = document.createElement('li');
+              const anchor = document.createElement('a');
+              anchor.href = link;
+              anchor.textContent = link;
+              listItem.appendChild(anchor);
+              list.appendChild(listItem);
+          });
+      }
+
+      // Call the fetch function when the page loads
+      document.addEventListener('DOMContentLoaded', fetchYouTubeLinks);
+  </script>
+  </body>
+</html>
